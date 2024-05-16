@@ -5,7 +5,7 @@ import Footer from "./components/Shared/Footer/Footer";
 
 function App() {
   return (
-    <div>
+    <div className='font-inter'>
       <Header />
       <Outlet />
       <Footer />

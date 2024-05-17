@@ -26,8 +26,8 @@ const Header = () => {
   );
 
   return (
-    <div className='bg-[#15151580] fixed top-0 w-full'>
-      <div className='max-w-screen-2xl mx-auto'>
+    <div className='bg-[#15151580] fixed top-0 max-w-screen-2xl w-full z-50'>
+      <div className=''>
         <div className='navbar px-0 text-color4'>
           <div className='navbar-start'>
             <div className='dropdown'>
@@ -51,16 +51,18 @@ const Header = () => {
               </div>
               <ul
                 tabIndex={0}
-                className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  bg-[#15151580] rounded-box w-52'>
+                className='menu menu-sm dropdown-content mt-[14px] z-[1] p-2 shadow  bg-[#15151580] rounded-box w-52'>
                 {navLinks}
               </ul>
             </div>
-            <Link to='/' className='font-cinzel uppercase text-color4 lg:pl-10'>
-              <p className='text-[32px] font-black'>Bistro Boss</p>
-              <p className='text-2xl font-bold tracking-[7px]'>Restaurant</p>
+            <Link to='/' className='font-cinzel uppercase text-color4 lg:pl-5'>
+              <p className=' text-2xl md:text-[32px] font-black'>Bistro Boss</p>
+              <p className='text-lg md:text-2xl font-bold tracking-[6px] md:tracking-[7px]'>
+                Restaurant
+              </p>
             </Link>
           </div>
-          <div className=' hidden lg:flex'>
+          <div className='navbar-end hidden lg:flex'>
             <ul className='menu menu-horizontal text-lg font-medium uppercase'>
               {navLinks}
             </ul>

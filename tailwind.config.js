@@ -14,9 +14,11 @@ export default {
       color8: "#D0D0D0",
       color9: "#E8E8E8",
       color10: "#F3F3F3",
+      color11: "#BB8506",
     },
     fontFamily: {
       inter: '"Inter", sans-serif',
+      cinzel: '"Cinzel", serif;',
     },
   },
   plugins: [require("daisyui")],

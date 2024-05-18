@@ -5,6 +5,7 @@ import Menu from "../../components/HomeComponents/Menu/Menu";
 import OnlineOrder from "../../components/HomeComponents/OnlineOrder/OnlineOrder";
 import OurBlog from "../../components/HomeComponents/OurBlog/OurBlog";
 import Recommends from "../../components/HomeComponents/Recommends/Recommends";
+import Testimonials from "../../components/HomeComponents/Testimonials/Testimonials";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <CallUs />
       <Recommends />
       <OurBlog />
+      <Testimonials />
     </div>
   );
 };

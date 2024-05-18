@@ -3,6 +3,7 @@ import CallUs from "../../components/HomeComponents/CallUs/CallUs";
 import ChefService from "../../components/HomeComponents/ChefService/ChefService";
 import Menu from "../../components/HomeComponents/Menu/Menu";
 import OnlineOrder from "../../components/HomeComponents/OnlineOrder/OnlineOrder";
+import OurBlog from "../../components/HomeComponents/OurBlog/OurBlog";
 import Recommends from "../../components/HomeComponents/Recommends/Recommends";
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
       <Menu />
       <CallUs />
       <Recommends />
+      <OurBlog />
     </div>
   );
 };

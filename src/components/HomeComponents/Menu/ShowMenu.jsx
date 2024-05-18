@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const ShowMenu = ({ menu }) => {
   const { image, name, recipe, price } = menu;
   return (
-    <div className='flex gap-8 items-center'>
+    <div className='flex flex-col md:flex-row gap-8 md:items-center'>
       <div>
         <img
           className='w-32 rounded-r-full rounded-b-full'
@@ -12,7 +12,7 @@ const ShowMenu = ({ menu }) => {
         />
       </div>
       <div>
-        <div className='flex justify-between items-center mb-2'>
+        <div className='flex flex-col md:flex-row justify-between md:items-center mb-2'>
           <h3 className='font-cinzel uppercase text-xl text-color3'>
             {name} ------------------
           </h3>

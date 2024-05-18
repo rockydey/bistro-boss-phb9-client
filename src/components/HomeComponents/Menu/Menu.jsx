@@ -25,7 +25,7 @@ const Menu = () => {
   return (
     <div className='max-w-screen-xl mx-auto my-24'>
       <SectionTitle heading='FROM OUR MENU' subHeading='Check it out' />
-      <div className='grid grid-cols-2 gap-6'>
+      <div className='grid grid-cols-1 px-3 md:px-5 lg:px-0 lg:grid-cols-2 gap-6'>
         {ourMenu.slice(0, 6).map((menu) => (
           <ShowMenu key={menu._id} menu={menu}></ShowMenu>
         ))}

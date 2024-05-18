@@ -3,6 +3,7 @@ import CallUs from "../../components/HomeComponents/CallUs/CallUs";
 import ChefService from "../../components/HomeComponents/ChefService/ChefService";
 import Menu from "../../components/HomeComponents/Menu/Menu";
 import OnlineOrder from "../../components/HomeComponents/OnlineOrder/OnlineOrder";
+import Recommends from "../../components/HomeComponents/Recommends/Recommends";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <ChefService />
       <Menu />
       <CallUs />
+      <Recommends />
     </div>
   );
 };

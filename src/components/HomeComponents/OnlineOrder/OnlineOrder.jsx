@@ -7,24 +7,15 @@ import slide2 from "../../../assets/home/slide2.jpg";
 import slide3 from "../../../assets/home/slide3.jpg";
 import slide4 from "../../../assets/home/slide4.jpg";
 import slide5 from "../../../assets/home/slide5.jpg";
+import SectionTitle from "../../SectionTitle/SectionTitle";
 
 const OnlineOrder = () => {
   return (
-    <div className='max-w-screen-lg mx-auto py-24'>
-      <div className='flex gap-2 justify-center items-center mb-4'>
-        <div className='w-5 border-2 border-dashed border-color11'></div>
-        <h4 className='font-normal italic text-xl text-color11'>
-          From 11:00am to 10:00pm
-        </h4>
-        <div className='w-5 border-2 border-dashed border-color11'></div>
-      </div>
-      <div className='flex flex-col items-center gap-5 mb-12'>
-        <div className='w-80 md:w-96 border-2 border-color9'></div>
-        <h2 className='text-[40px] font-normal text-color3 uppercase'>
-          Order Online
-        </h2>
-        <div className='w-80 md:w-96 border-2 border-color9'></div>
-      </div>
+    <div className='max-w-screen-lg mx-auto my-24'>
+      <SectionTitle
+        heading={"Order Online"}
+        subHeading={"From 11:00am to 10:00pm"}
+      />
       <div>
         <Swiper
           slidesPerView={4}

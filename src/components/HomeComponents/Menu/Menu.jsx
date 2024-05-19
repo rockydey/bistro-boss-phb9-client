@@ -1,32 +1,17 @@
-import { useState } from "react";
 import SectionTitle from "../../SectionTitle/SectionTitle";
-import { useEffect } from "react";
-import axios from "axios";
 import ShowMenu from "./ShowMenu";
 import { Link } from "react-router-dom";
+import useMenu from "../../../hooks/useMenu";
 
 const Menu = () => {
-  const [ourMenu, setOurMenu] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("menu.json")
-      .then((res) =>
-        setOurMenu(
-          res.data.filter(
-            (resData) =>
-              resData.category === "popular" || resData.category === "offered"
-          )
-        )
-      )
-      .catch((error) => console.error(error.message));
-  }, []);
+  const [ourMenu] = useMenu();
+  const popularMenu = ourMenu.filter((menu) => menu.category === "popular");
 
   return (
     <div className='max-w-screen-xl mx-auto my-24'>
       <SectionTitle heading='FROM OUR MENU' subHeading='Check it out' />
       <div className='grid grid-cols-1 px-3 md:px-5 lg:px-0 lg:grid-cols-2 gap-6'>
-        {ourMenu.slice(0, 6).map((menu) => (
+        {popularMenu.map((menu) => (
           <ShowMenu key={menu._id} menu={menu}></ShowMenu>
         ))}
       </div>

@@ -1,7 +1,7 @@
 import SectionTitle from "../../SectionTitle/SectionTitle";
 import ShowMenu from "./ShowMenu";
-import { Link } from "react-router-dom";
 import useMenu from "../../../hooks/useMenu";
+import CommonBtn from "../../Shared/CommonBtn/CommonBtn";
 
 const Menu = () => {
   const [ourMenu] = useMenu();
@@ -15,13 +15,7 @@ const Menu = () => {
           <ShowMenu key={menu._id} menu={menu}></ShowMenu>
         ))}
       </div>
-      <div className='text-center mt-10'>
-        <Link
-          to='/'
-          className='text-xl font-medium text-color1 px-4 py-3 border-b-2 border-b-color1 rounded-xl'>
-          View Full Menu
-        </Link>
-      </div>
+      <CommonBtn text='View Full Menu' />
     </div>
   );
 };

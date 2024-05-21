@@ -8,7 +8,7 @@ const Login = () => {
     <div
       style={{ backgroundImage: `url(${authenticationImg})` }}
       className='bg-center bg-no-repeat bg-cover py-24'>
-      <div className='max-w-screen-xl mx-auto px-24 flex flex-col md:flex-row items-center gap-24'>
+      <div className='max-w-screen-xl shadow-2xl shadow-color7 mx-auto py-10 px-24 flex flex-col md:flex-row items-center gap-24'>
         <div className='lg:w-1/2'>
           <img className='w-full' src={loginImg} alt='' />
         </div>

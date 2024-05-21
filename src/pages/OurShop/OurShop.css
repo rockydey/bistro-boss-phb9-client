@@ -1,0 +1,6 @@
+.react-tabs__tab-list,
+.react-tabs__tab,
+.react-tabs__tab--selected {
+  border-bottom: none;
+  border-color: white;
+}

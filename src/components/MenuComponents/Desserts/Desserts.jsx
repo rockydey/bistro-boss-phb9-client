@@ -2,7 +2,7 @@ import useMenu from "../../../hooks/useMenu";
 import ShowMenu from "../../HomeComponents/Menu/ShowMenu";
 import CommonBtn from "../../Shared/CommonBtn/CommonBtn";
 
-const Desserts = () => {
+const Desserts = ({title}) => {
   const [ourMenu] = useMenu();
   const desserts = ourMenu.filter((dessert) => dessert.category === "dessert");
 
@@ -13,7 +13,7 @@ const Desserts = () => {
           <ShowMenu key={offer._id} menu={offer} />
         ))}
       </div>
-      <CommonBtn text='ORDER YOUR FAVOURITE FOOD' />
+      <CommonBtn title={title} text='ORDER YOUR FAVOURITE FOOD' />
     </div>
   );
 };

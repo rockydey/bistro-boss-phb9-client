@@ -28,31 +28,31 @@ const OurMenu = () => {
         heading='OUR MENU'
         subHeading='Would you like to try a dish?'
       />
-      <Offers />
+      <Offers title="offer" />
       <Cover
         img={dessertImg}
         heading='DESSERTS'
         subHeading='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
       />
-      <Desserts />
+      <Desserts title="dessert" />
       <Cover
         img={pizzaImg}
         heading='PIZZA'
         subHeading='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
       />
-      <MenuItems foods={pizzas} />
+      <MenuItems title="pizza" foods={pizzas} />
       <Cover
         img={saladImg}
         heading='Salads'
         subHeading='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
       />
-      <MenuItems foods={salads} />
+      <MenuItems title="salad" foods={salads} />
       <Cover
         img={soupImg}
         heading='Soups'
         subHeading='Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
       />
-      <MenuItems foods={soups} />
+      <MenuItems title="soup" foods={soups} />
     </div>
   );
 };

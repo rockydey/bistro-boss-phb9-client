@@ -3,7 +3,7 @@ import ShowMenu from "../../HomeComponents/Menu/ShowMenu";
 import SectionTitle from "../../SectionTitle/SectionTitle";
 import CommonBtn from "../../Shared/CommonBtn/CommonBtn";
 
-const Offers = () => {
+const Offers = ({ title }) => {
   const [ourMenu] = useMenu();
   const offers = ourMenu.filter((menu) => menu.category === "offered");
 
@@ -15,7 +15,7 @@ const Offers = () => {
           <ShowMenu key={offer._id} menu={offer} />
         ))}
       </div>
-      <CommonBtn text='ORDER YOUR FAVOURITE FOOD' />
+      <CommonBtn title={title} text='ORDER YOUR FAVOURITE FOOD' />
     </div>
   );
 };

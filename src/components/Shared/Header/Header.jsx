@@ -4,9 +4,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { IoIosCart } from "react-icons/io";
+import useCart from "../../../hooks/useCart";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
 
   const handleLogout = () => {
     logOut().then(() => {
@@ -28,10 +30,10 @@ const Header = () => {
       <li>
         <NavLink to='/shop'>Our Shop</NavLink>
       </li>
-      <li className="">
+      <li className=''>
         <div className=''>
           <IoIosCart />
-          <div className='badge'>+0</div>
+          <div className='badge'>+{cart.length}</div>
         </div>
       </li>
       {user ? (

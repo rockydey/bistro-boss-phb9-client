@@ -1,15 +1,41 @@
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import useAxoisSecure from "../../../hooks/useAxoisSecure";
+import useCart from "../../../hooks/useCart";
 
 const FoodItems = ({ foodItem }) => {
   const { name, recipe, image } = foodItem;
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const axiosSecure = useAxoisSecure();
+  const [, refatch] = useCart();
 
   const handleFoodCart = (food) => {
+    const { name, image, price, _id } = food;
+
     if (user && user.email) {
-      console.log(food);
+      const cartItem = {
+        menuId: _id,
+        email: user.email,
+        name,
+        image,
+        price,
+      };
+
+      axiosSecure
+        .post("/carts", cartItem)
+        .then((res) => {
+          if (res.data.insertedId) {
+            toast.success("Food added to cart successfully!");
+            refatch();
+          }
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
     } else {
       Swal.fire({
         title: "You aren't login",
@@ -21,7 +47,7 @@ const FoodItems = ({ foodItem }) => {
         confirmButtonText: "Yes, Login",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/login");
+          navigate("/login", { state: { from: location } });
         }
       });
     }
@@ -39,6 +65,7 @@ const FoodItems = ({ foodItem }) => {
           Add to Cart
         </button>
       </div>
+      <Toaster />
     </div>
   );
 };

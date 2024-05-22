@@ -25,7 +25,7 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
-        navigate(location.state?.form?.pathname || "/");
+        navigate(location.state?.from?.pathname || "/");
         toast.success("Signed up successfully!");
       })
       .catch((error) => {
@@ -37,7 +37,7 @@ const Register = () => {
     googleLogin()
       .then((result) => {
         console.log(result.user);
-        navigate(location.state?.form?.pathname || "/");
+        navigate(location.state?.from?.pathname || "/");
         toast.success("Signed up successfully!");
       })
       .catch((error) => {

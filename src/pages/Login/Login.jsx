@@ -37,7 +37,7 @@ const Login = () => {
       signInUser(email, password)
         .then((result) => {
           console.log(result.user);
-          navigate(location.state?.form?.pathname || "/");
+          navigate(location.state?.from?.pathname || "/");
           toast.success("Logged in successfully!");
         })
         .catch((error) => {
@@ -50,7 +50,7 @@ const Login = () => {
     googleLogin()
       .then((result) => {
         console.log(result.user);
-        navigate(location.state?.form?.pathname || "/");
+        navigate(location.state?.from?.pathname || "/");
         toast.success("Logged in successfully!");
       })
       .catch((error) => {

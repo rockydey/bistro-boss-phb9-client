@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import authenticationImg from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2.png";
 import { FaGoogle } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const { createUser, googleLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -22,6 +25,8 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+        navigate(location.state?.form?.pathname || "/");
+        toast.success("Signed up successfully!");
       })
       .catch((error) => {
         console.error(error.message);
@@ -32,6 +37,8 @@ const Register = () => {
     googleLogin()
       .then((result) => {
         console.log(result.user);
+        navigate(location.state?.form?.pathname || "/");
+        toast.success("Signed up successfully!");
       })
       .catch((error) => {
         console.error(error.message);
@@ -123,6 +130,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

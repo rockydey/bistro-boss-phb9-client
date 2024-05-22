@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import authenticationImg from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2.png";
 import { FaGoogle } from "react-icons/fa";
@@ -14,6 +14,8 @@ import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { signInUser, googleLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -35,6 +37,8 @@ const Login = () => {
       signInUser(email, password)
         .then((result) => {
           console.log(result.user);
+          navigate(location.state?.form?.pathname || "/");
+          toast.success("Logged in successfully!");
         })
         .catch((error) => {
           console.error(error.message);
@@ -46,6 +50,8 @@ const Login = () => {
     googleLogin()
       .then((result) => {
         console.log(result.user);
+        navigate(location.state?.form?.pathname || "/");
+        toast.success("Logged in successfully!");
       })
       .catch((error) => {
         console.error(error.message);

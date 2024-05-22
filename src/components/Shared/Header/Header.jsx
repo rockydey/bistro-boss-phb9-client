@@ -3,6 +3,7 @@ import "./Header.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import { IoIosCart } from "react-icons/io";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -15,11 +16,8 @@ const Header = () => {
 
   const navLinks = (
     <>
-      <li>
+      <li className=''>
         <NavLink to='/'>Home</NavLink>
-      </li>
-      <li>
-        <NavLink to='/contact'>Contact Us</NavLink>
       </li>
       <li>
         <NavLink to='/dashboard'>Dashboard</NavLink>
@@ -30,13 +28,20 @@ const Header = () => {
       <li>
         <NavLink to='/shop'>Our Shop</NavLink>
       </li>
+      <li className="">
+        <div className=''>
+          <IoIosCart />
+          <div className='badge'>+0</div>
+        </div>
+      </li>
       {user ? (
-        <li>
+        <li className='flex-row'>
           <button
             onClick={handleLogout}
-            className='text-xl font-semibold hover:bg-color11 bg-color11'>
+            className='text-lg font-medium uppercase'>
             Logout
           </button>
+          {/* <img className='w-[75px] rounded-full' src={user?.photoURL} alt='' /> */}
         </li>
       ) : (
         <li>

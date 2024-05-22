@@ -7,10 +7,14 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "../../providers/AuthProvider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
+  const { signInUser, googleLogin } = useContext(AuthContext);
+
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -28,13 +32,33 @@ const Login = () => {
       form.captcha.value = "";
     } else {
       console.log(email, password);
+      signInUser(email, password)
+        .then((result) => {
+          console.log(result.user);
+        })
+        .catch((error) => {
+          console.error(error.message);
+        });
     }
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
   };
 
   return (
     <div
       style={{ backgroundImage: `url(${authenticationImg})` }}
       className='bg-center bg-no-repeat bg-cover py-24'>
+      <Helmet>
+        <title>Bistro Boss | Login</title>
+      </Helmet>
       <div className='max-w-screen-xl shadow-2xl shadow-color7 mx-auto py-10 px-24 flex flex-col md:flex-row items-center gap-24'>
         <div className='lg:w-1/2'>
           <img className='w-full' src={loginImg} alt='' />
@@ -105,7 +129,9 @@ const Login = () => {
             <p className='my-6 text-color5 font-medium text-xl'>
               Or sign in with
             </p>
-            <button className='text-2xl p-3 border-4 cursor-pointer border-color5 text-color5 rounded-full'>
+            <button
+              onClick={handleGoogleLogin}
+              className='text-2xl p-3 border-4 cursor-pointer border-color5 text-color5 rounded-full'>
               <FaGoogle />
             </button>
           </div>

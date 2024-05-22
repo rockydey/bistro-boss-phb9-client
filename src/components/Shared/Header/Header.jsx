@@ -1,7 +1,18 @@
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut().then(() => {
+      toast.success("User logged out successfully!");
+    });
+  };
+
   const navLinks = (
     <>
       <li>
@@ -19,9 +30,19 @@ const Header = () => {
       <li>
         <NavLink to='/shop'>Our Shop</NavLink>
       </li>
-      <li>
-        <NavLink to='/login'>Login</NavLink>
-      </li>
+      {user ? (
+        <li>
+          <button
+            onClick={handleLogout}
+            className='text-xl font-semibold hover:bg-color11 bg-color11'>
+            Logout
+          </button>
+        </li>
+      ) : (
+        <li>
+          <NavLink to='/login'>Login</NavLink>
+        </li>
+      )}
     </>
   );
 
@@ -69,6 +90,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

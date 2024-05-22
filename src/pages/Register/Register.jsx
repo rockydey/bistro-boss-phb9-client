@@ -2,12 +2,49 @@ import { Link } from "react-router-dom";
 import authenticationImg from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2.png";
 import { FaGoogle } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
+  const { createUser, googleLogin } = useContext(AuthContext);
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    const form = event.target;
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(name, email, password);
+
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+
   return (
     <div
       style={{ backgroundImage: `url(${authenticationImg})` }}
       className='bg-center bg-no-repeat bg-cover py-24'>
+      <Helmet>
+        <title>Bistro Boss | Register</title>
+      </Helmet>
       <div className='max-w-screen-xl shadow-2xl shadow-color7 mx-auto py-10 px-24 flex flex-col md:flex-row-reverse items-center gap-24'>
         <div className='lg:w-1/2'>
           <img className='w-full' src={loginImg} alt='' />
@@ -16,7 +53,7 @@ const Register = () => {
           <h3 className='text-center text-4xl font-bold text-color3 mb-5'>
             Sign Up
           </h3>
-          <form className=''>
+          <form onSubmit={handleSignUp} className=''>
             <div className='mb-6'>
               <label
                 className='text-xl inline-block font-semibold text-color5 mb-4'
@@ -78,7 +115,9 @@ const Register = () => {
             <p className='my-6 text-color5 font-medium text-xl'>
               Or sign up with
             </p>
-            <button className='text-2xl p-3 border-4 cursor-pointer border-color5 text-color5 rounded-full'>
+            <button
+              onClick={handleGoogleLogin}
+              className='text-2xl p-3 border-4 cursor-pointer border-color5 text-color5 rounded-full'>
               <FaGoogle />
             </button>
           </div>

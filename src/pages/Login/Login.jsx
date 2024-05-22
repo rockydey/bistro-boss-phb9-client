@@ -2,8 +2,35 @@ import { Link } from "react-router-dom";
 import authenticationImg from "../../assets/others/authentication.png";
 import loginImg from "../../assets/others/authentication2.png";
 import { FaGoogle } from "react-icons/fa";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
+import { useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+
+    const email = form.email.value;
+    const password = form.password.value;
+    const captcha = form.captcha.value;
+
+    if (validateCaptcha(captcha) !== true) {
+      toast.error("Captcha doesn't match!");
+      form.captcha.value = "";
+    } else {
+      console.log(email, password);
+    }
+  };
+
   return (
     <div
       style={{ backgroundImage: `url(${authenticationImg})` }}
@@ -16,7 +43,7 @@ const Login = () => {
           <h3 className='text-center text-4xl font-bold text-color3 mb-5'>
             Login
           </h3>
-          <form className=''>
+          <form onSubmit={handleLogin} className=''>
             <div className='mb-6'>
               <label
                 className='text-xl inline-block font-semibold text-color5 mb-4'
@@ -48,18 +75,18 @@ const Login = () => {
               />
             </div>
             <div>
-              <input
-                type='text'
-                className='block w-full border border-color8 py-4 px-5 focus:outline-none rounded-lg'
-              />
-              <p className='text-xl font-semibold text-[#5D5FEF] mt-2 mb-6'>
+              <div>
+                <LoadCanvasTemplate />
+              </div>
+              {/* <p className='text-xl font-semibold text-[#5D5FEF] mt-2 mb-6'>
                 Reload Captcha
-              </p>
+              </p> */}
               <input
                 type='text'
                 placeholder='Type Captcha'
+                name='captcha'
                 required
-                className='block w-full border border-color8 py-4 px-5 focus:outline-none rounded-lg'
+                className='block w-full border border-color8 py-4 mt-6 px-5 focus:outline-none rounded-lg'
               />
             </div>
             <div className='mt-7'>
@@ -84,6 +111,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

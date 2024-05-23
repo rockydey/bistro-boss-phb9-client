@@ -31,10 +31,10 @@ const Header = () => {
         <NavLink to='/shop'>Our Shop</NavLink>
       </li>
       <li className=''>
-        <div className=''>
+        <NavLink to='/dashboard/cart' className=''>
           <IoIosCart />
           <div className='badge'>+{cart.length}</div>
-        </div>
+        </NavLink>
       </li>
       {user ? (
         <li className='flex-row'>

@@ -5,6 +5,8 @@ import OurMenu from "../../pages/OurMenu/OurMenu";
 import OurShop from "../../pages/OurShop/OurShop";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
+import Dashboard from "../../layouts/Dashboard";
+import Cart from "../../pages/Dashboard/Cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,16 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <OurShop />,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "cart",
+        element: <Cart />,
       },
     ],
   },

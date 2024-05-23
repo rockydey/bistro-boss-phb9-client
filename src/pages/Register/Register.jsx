@@ -6,27 +6,48 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
+import useAxoisPublic from "../../hooks/useAxoisPublic";
 
 const Register = () => {
-  const { createUser, googleLogin } = useContext(AuthContext);
+  const { createUser, googleLogin, updateUserProfile } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const axoisPublic = useAxoisPublic();
 
   const handleSignUp = (event) => {
     event.preventDefault();
     const form = event.target;
 
     const name = form.name.value;
+    const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-
-    console.log(name, email, password);
 
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
-        navigate(location.state?.from?.pathname || "/");
-        toast.success("Signed up successfully!");
+        updateUserProfile(name, photo)
+          .then(() => {
+            const userInfo = {
+              name: name,
+              email: email,
+            };
+            axoisPublic
+              .post("/users", userInfo)
+              .then((res) => {
+                if (res.data.insertedId) {
+                  navigate(location.state?.from?.pathname || "/");
+                  toast.success("Signed up successfully!");
+                }
+              })
+              .catch((error) => {
+                console.error(error.message);
+              });
+          })
+          .catch((error) => {
+            console.error(error.message);
+          });
       })
       .catch((error) => {
         console.error(error.message);
@@ -71,6 +92,21 @@ const Register = () => {
                 type='name'
                 id='name'
                 name='name'
+                required
+                placeholder='Enter Your Name'
+                className='block w-full border border-color8 py-4 px-5 focus:outline-none rounded-lg'
+              />
+            </div>
+            <div className='mb-6'>
+              <label
+                className='text-xl inline-block font-semibold text-color5 mb-4'
+                htmlFor='photo'>
+                PhotoURL
+              </label>
+              <input
+                type='photo'
+                id='photo'
+                name='photo'
                 required
                 placeholder='Enter Your Name'
                 className='block w-full border border-color8 py-4 px-5 focus:outline-none rounded-lg'

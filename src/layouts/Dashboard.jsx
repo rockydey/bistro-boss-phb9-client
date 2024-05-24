@@ -12,10 +12,11 @@ import {
 } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 // import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   return (
     <div>

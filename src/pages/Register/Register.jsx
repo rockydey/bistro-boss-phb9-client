@@ -58,8 +58,20 @@ const Register = () => {
     googleLogin()
       .then((result) => {
         console.log(result.user);
-        navigate(location.state?.from?.pathname || "/");
-        toast.success("Signed up successfully!");
+        const userInfo = {
+          name: result.user.displayName,
+          email: result.user.email,
+        };
+        axoisPublic
+          .post("/users", userInfo)
+          .then((res) => {
+            console.log(res.data);
+            navigate(location.state?.from?.pathname || "/");
+            toast.success("Signed up successfully!");
+          })
+          .catch((error) => {
+            console.error(error.message);
+          });
       })
       .catch((error) => {
         console.error(error.message);

@@ -11,11 +11,13 @@ import { useContext, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../providers/AuthProvider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import useAxoisPublic from "../../hooks/useAxoisPublic";
 
 const Login = () => {
   const { signInUser, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const axoisPublic = useAxoisPublic();
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -49,9 +51,20 @@ const Login = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
-        console.log(result.user);
-        navigate(location.state?.from?.pathname || "/");
-        toast.success("Logged in successfully!");
+        const userInfo = {
+          name: result.user.displayName,
+          email: result.user.email,
+        };
+        axoisPublic
+          .post("/users", userInfo)
+          .then((res) => {
+            console.log(res.data);
+            navigate(location.state?.from?.pathname || "/");
+            toast.success("Logged in successfully!");
+          })
+          .catch((error) => {
+            console.error(error.message);
+          });
       })
       .catch((error) => {
         console.error(error.message);

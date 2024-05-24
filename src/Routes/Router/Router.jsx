@@ -8,6 +8,7 @@ import Register from "../../pages/Register/Register";
 import Dashboard from "../../layouts/Dashboard";
 import Cart from "../../pages/Dashboard/Cart/Cart";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import AllUsers from "../../pages/Dashboard/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -36,9 +37,16 @@ const router = createBrowserRouter([
       </PrivateRoutes>
     ),
     children: [
+      // users route
       {
         path: "cart",
         element: <Cart />,
+      },
+
+      // admin routes
+      {
+        path: "users",
+        element: <AllUsers />,
       },
     ],
   },

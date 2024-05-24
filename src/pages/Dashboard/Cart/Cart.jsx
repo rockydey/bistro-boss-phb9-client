@@ -67,7 +67,7 @@ const Cart = () => {
             <tbody>
               {cart.map((item, index) => (
                 <tr key={item._id}>
-                  <th>{index + 1}</th>
+                  <td>{index + 1}</td>
                   <td>
                     <div className='flex items-center gap-3'>
                       <div className='avatar'>
@@ -82,13 +82,13 @@ const Cart = () => {
                   </td>
                   <td>{item.name}</td>
                   <td>${item.price}</td>
-                  <th>
+                  <td>
                     <button
                       onClick={() => handleDelete(item._id)}
                       className='bg-[#B91C1C] text-color4 p-2 rounded-md'>
                       <FaTrash />
                     </button>
-                  </th>
+                  </td>
                 </tr>
               ))}
             </tbody>

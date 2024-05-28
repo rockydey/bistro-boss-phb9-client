@@ -1,56 +1,41 @@
+import { useLoaderData } from "react-router-dom";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form";
-import useAxoisPublic from "../../../hooks/useAxoisPublic";
 import useAxoisSecure from "../../../hooks/useAxoisSecure";
 import Swal from "sweetalert2";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
-const AddItems = () => {
+const UpdateItem = () => {
   const { register, handleSubmit } = useForm();
-  const axiosPublic = useAxoisPublic();
+  const item = useLoaderData();
   const axiosSecure = useAxoisSecure();
 
-  const handleAddItem = async (data) => {
-    console.log(data);
+  const handleUpdateItem = async (data) => {
+    // console.log(data);
 
-    // upload image to imgbb and then get an url
-    const imageFile = { image: data.image[0] };
-    const res = await axiosPublic.post(image_hosting_api, imageFile, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    if (res.data.success) {
-      const menuItem = {
-        name: data.name,
-        category: data.category,
-        recipe: data.details,
-        price: parseInt(data.price),
-        image: res.data.data.display_url,
-      };
+    const menuItem = {
+      name: data.name,
+      category: data.category,
+      recipe: data.details,
+      price: parseInt(data.price),
+    };
 
-      const menuRes = await axiosSecure.post("/menu", menuItem);
-      console.log(menuRes.data);
-      if (menuRes.data.insertedId) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Item added successfully!",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      }
+    const updateRes = await axiosSecure.patch(`/menu/${item._id}`, menuItem);
+    console.log(updateRes.data);
+    if (updateRes.data.modifiedCount > 0) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Item added successfully!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
     }
-    console.log(res.data);
   };
-
   return (
     <div>
-      <SectionTitle heading='Add an Item' subHeading="What's new" />
+      <SectionTitle heading='Update Item' subHeading='Hurry up!' />
       <div className='max-w-screen-md mx-auto'>
-        <form onSubmit={handleSubmit(handleAddItem)} className='space-y-5'>
+        <form onSubmit={handleSubmit(handleUpdateItem)} className='space-y-5'>
           <div>
             <label
               className='block mb-2 text-xl font-semibold text-color5'
@@ -61,7 +46,7 @@ const AddItems = () => {
               type='text'
               className='w-full bg-color10 rounded-lg py-4 pl-5'
               id='name'
-              placeholder='Recipe name'
+              defaultValue={item.name}
               {...register("name", { required: true })}
             />
           </div>
@@ -73,12 +58,12 @@ const AddItems = () => {
                 Category<sup>*</sup>
               </label>
               <select
-                defaultValue='category'
+                defaultValue={item.category}
                 className='w-full bg-color10 rounded-lg py-4 pl-5'
                 id='category'
                 {...register("category", { required: true })}>
-                <option className='' value='category' disabled>
-                  Category
+                <option className='' value={item.category} disabled>
+                  {item.category}
                 </option>
                 <option value='salad'>salad</option>
                 <option value='pizza'>pizza</option>
@@ -97,7 +82,7 @@ const AddItems = () => {
                 type='number'
                 className='w-full bg-color10 rounded-lg py-4 pl-5'
                 id='price'
-                placeholder='Price'
+                defaultValue={item.price}
                 {...register("price", { required: true })}
               />
             </div>
@@ -112,18 +97,15 @@ const AddItems = () => {
               rows='5'
               className='w-full bg-color10 rounded-lg py-4 pl-5'
               id='details'
-              placeholder='Recipe details'
+              defaultValue={item.recipe}
               {...register("details", { required: true })}
             />
           </div>
-          <div>
-            <input type='file' {...register("image", { required: true })} />
-          </div>
-          <div>
+          <div className='text-center'>
             <input
               type='submit'
-              className='px-4 py-3 bg-gradient-to-r from-[#835D23] to-[#B58130] text-color4 uppercase font-semibold text-lg cursor-pointer'
-              value='Add Item'
+              className='px-4 py-3 bg-gradient-to-r from-[#835D23] to-[#B58130] text-color4 font-semibold text-lg cursor-pointer'
+              value='Update Recipe Details'
             />
           </div>
         </form>
@@ -132,4 +114,4 @@ const AddItems = () => {
   );
 };
 
-export default AddItems;
+export default UpdateItem;

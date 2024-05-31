@@ -4,6 +4,7 @@ import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxoisSecure from "../../../hooks/useAxoisSecure";
 import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -48,9 +49,19 @@ const Cart = () => {
         <div className='text-3xl mb-5 font-bold text-color3 font-cinzel flex justify-between items-center'>
           <h2 className=''>Total orders: {cart.length}</h2>
           <h2>Total Price: ${totalPrice}</h2>
-          <button className='bg-[#D1A054] text-color4 p-2 rounded-lg'>
-            Pay
-          </button>
+          {cart.length !== 0 ? (
+            <Link to='/dashboard/payment'>
+              <button className='bg-[#D1A054] text-color4 p-2 rounded-lg'>
+                Pay
+              </button>
+            </Link>
+          ) : (
+            <button
+              disabled={true}
+              className='disabled:cursor-not-allowed bg-color8 text-color9 p-2 rounded-lg'>
+              Pay
+            </button>
+          )}
         </div>
         <div className='overflow-x-auto'>
           <table className='table'>
